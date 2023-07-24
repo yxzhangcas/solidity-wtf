@@ -1,8 +1,5 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.19;        // 版本号对齐
-
-// 引用协议
-import "github.com/OpenZeppelin/openzeppelin-solidity/contracts/token/ERC721/IERC721.sol";
+pragma solidity ^0.8.4;
 
 // abstract合约
 abstract contract InsertionSort {
@@ -11,18 +8,23 @@ abstract contract InsertionSort {
 
 // 接口规则：1-不包含状态变量；2-不包含构造函数；3-只能继承接口；4-函数都是external且都无函数体；5-继承的合约实现全部接口功能
 
-// ERC721代币接口
-contract interactBAYC {
-    // 利用BAYC地址创建接口合约变量（ETH主网）
-    IERC721 BAYC = IERC721(0xBC4CA0EdA7647A8aB7C2061c2E118A18a936f13D);
+abstract contract Base {
+    string public name = "Base";
+    function getAlias() public pure virtual returns(string memory);
+}
 
-    // 通过接口调用BAYC的balanceOf()查询持仓量
-    function balanceOfBAYC(address owner) external view returns (uint256 balance){
-        return BAYC.balanceOf(owner);
+contract BaseImpl is Base {
+    function getAlias() public pure override returns(string memory) {
+        return "BaseImpl";
     }
+}
 
-    // 通过接口调用BAYC的safeTransferFrom()安全转账
-    function safeTransferFromBAYC(address from, address to, uint256 tokenId) external{
-        BAYC.safeTransferFrom(from, to, tokenId);
+interface I {
+    function getName() external pure returns (string memory);
+}
+
+contract Imp is I {
+    function getName() external pure override returns (string memory) {
+        return "IMP";
     }
 }
