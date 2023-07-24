@@ -18,6 +18,9 @@ contract Events {
         // 记录事件
         emit Transfer(from, to, amount);
 
-        // 可以通过MetaMask的测试网SepoliaETH进行部署和调用，并通过区块链浏览器查看Log数据：https://sepolia.etherscan.io/tx/0xa696b35fa3e9aaca57ea7492aa2cc4345d5dcfa06705d2dc2dab25adf29486f5#eventlog
+        // 可以通过MetaMask的测试网SepoliaETH进行部署和调用，并通过区块链浏览器etherscan查看Log数据：
+        // https://sepolia.etherscan.io/tx/0xa696b35fa3e9aaca57ea7492aa2cc4345d5dcfa06705d2dc2dab25adf29486f5#eventlog
+ 
+        // 链上分析工具：Nansen, Dune Analysis
     }
 }
