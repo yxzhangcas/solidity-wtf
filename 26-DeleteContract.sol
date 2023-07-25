@@ -13,6 +13,7 @@ contract DeleteContract {
     // 此接口的调用最好可以限制使用人员，只能创建者调用：紧急情况下的后门功能
     function deleteContract() external {
         selfdestruct(payable(msg.sender));      //WARN: selfdestruct已经废弃了，不推荐使用，没查到替代用法
+        // https://eips.ethereum.org/EIPS/eip-4758
     }
 
     function getBalance() external view returns (uint balance) {    //合约销毁后，返回默认值
