@@ -66,4 +66,30 @@ contract ABICodec {
         // 需要明确指定decode后的数据类型
         (dx, daddr, dname, darray) = abi.decode(data, (uint, address, string, uint[2]));
     }
+
+
+    // 用法1：配合call实现对合约的底层调用
+    // function use1() public pure returns (uint256) {
+    //     bytes4 selector = contract.getValue.selector;
+    //     bytes memory data = abi.encodeWithSignature(selector, _x);
+    //     (bool success, bytes memory returnedData) = address(contract).staticcall(data);
+    //     require(success);
+    //     return abi.decode(returnedData, (uint256));
+    // }
+
+    // 用法2：ether.js中实现合约的导入和函数调用
+    // function use2() public pure {
+    //     const wavePortalContract = new ethers.Contract(contractAddress, contractABI, signer);
+    //     const waves = await wavePortalContract.getAllWaves();
+    // }
+
+    // 用法3：对不开源合约反编译后，通过ABI进行调用
+    // function use3() public pure returns (uint256) {
+    //     bytes memory data = abi.encodeWithSelector(bytes4(0x533ba33a));
+
+    //     (bool success, bytes memory returnedData) = address(contract).staticcall(data);
+    //     require(success);
+
+    //     return abi.decode(returnedData, (uint256));
+    // }
 }
