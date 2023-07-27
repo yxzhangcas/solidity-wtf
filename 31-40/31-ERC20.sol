@@ -6,11 +6,11 @@ import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contr
 // ERC20是以太坊代币标准，实现了代币转账基本逻辑：账户余额、转账、授权转账、代币总供给、代币信息（名称、代号、小数位数）
 // IERC20是接口合约，定义通用的函数名称、输入参数、输出参数
 
-contract ERC20Impl is IERC20 {
+contract ERC20Impl is IERC20 {  // 2个Event，6个函数（其中3个查询函数可以直接使用public状态实现）
 
-    mapping(address => uint256) public override balanceOf;
-    mapping(address => mapping(address => uint256)) public override allowance;
-
+    // 此处的三个override其实是自动添加的getter函数继承了接口函数，本身接口是没有状态的
+    mapping(address => uint256) public override balanceOf;      // 地址-Token数量映射
+    mapping(address => mapping(address => uint256)) public override allowance;  // 地址-授权-Token数量映射
     uint256 public override totalSupply;    //代币总供给
 
     string public name;             //名称
@@ -58,5 +58,10 @@ contract ERC20Impl is IERC20 {
         balanceOf[msg.sender] -= amount;
         totalSupply -= amount;
         emit Transfer(msg.sender, address(0), amount);
+    }
+
+    // 自测：普通的四则运算符已经具备了上下溢出的错误检查功能，出现溢出会直接revert！
+    function foo(uint a, uint b) public pure returns (uint c) {
+        c = a - b;
     }
 }
